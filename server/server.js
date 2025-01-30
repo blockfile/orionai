@@ -7,7 +7,7 @@ const { Readable } = require("stream");
 const Replicate = require("replicate");
 
 const PORT = 3001;
-
+const REPLICATE_API_TOKEN = "r8_Fg4nRbxyr9smZvZmfgduOhKndNAkK9439yb0A";
 const app = express();
 
 // CORS CONFIGURATION
@@ -25,7 +25,9 @@ app.use(bodyParser.json());
 // API Route for Image Generation
 app.post("/api/generateImages", async (req, res) => {
   const { prompt } = req.body;
-
+ const replicate = new Replicate({
+    auth: REPLICATE_API_TOKEN,
+  });
   try {
     console.log("Request Body:", req.body);
     const prediction = await replicate.run(
